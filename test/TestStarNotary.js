@@ -1,3 +1,5 @@
+import { assert } from "console";
+
 const StarNotary = artifacts.require('./StarNotary.sol')
 
 let accounts;
@@ -73,3 +75,26 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     let value = Number(balanceOfUser2BeforeTransaction) - Number(balanceAfterUser2BuysStar);
     assert.equal(value, starPrice);
 });
+
+// it('has correct name', async() => {
+//     let instance = await StarNotary.deployed();
+//     assert.equal(instance.starName.call(), "JGTech");
+// });
+
+// it('has correct symbol', async() => {
+//     let instance = await StarNotary.deployed();
+//     assert.equal(instance.starName.call(), "JGT");
+// });
+
+// it('can exchange two star between two users', async() => {
+//     let instance = await StarNotary.deployed();
+//     let user1 = accounts[1];
+//     let user2 = accounts[2];
+//     let starId1 = 5;
+//     let starId2 = 6;
+//     await instance.createStar('awesome star1', starId1, {from: user1});
+//     await instance.createStar('awesome star2', starId2, {from: user2});
+//     await instance.exchangeStars(starId1, starId2, {from: user1});
+//     assert.equal(instance.ownerOf(starId1), user2);
+//     assert.equal(instance.ownerOf(starId2), user1);
+// })
