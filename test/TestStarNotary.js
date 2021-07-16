@@ -1,5 +1,3 @@
-import { assert } from "console";
-
 const StarNotary = artifacts.require('./StarNotary.sol')
 
 let accounts;
@@ -76,25 +74,33 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     assert.equal(value, starPrice);
 });
 
-// it('has correct name', async() => {
-//     let instance = await StarNotary.deployed();
-//     assert.equal(instance.starName.call(), "JGTech");
-// });
+it('can add the star name and star symbol properly', async() => {
+    let instance = await StarNotary.deployed();
+    assert.equal(await instance.starName.call(), "JGTech");
+    assert.equal(await instance.starSymbol.call(), "JGT");
+});
 
-// it('has correct symbol', async() => {
-//     let instance = await StarNotary.deployed();
-//     assert.equal(instance.starName.call(), "JGT");
-// });
+it('lets 2 users exchange stars', async() => {
+    let instance = await StarNotary.deployed();
+    let user1 = accounts[1];
+    let user2 = accounts[2];
+    let starId1 = 6;
+    let starId2 = 7;
+    await instance.createStar('awesome star1', starId1, {from: user1});
+    await instance.createStar('awesome star2', starId2, {from: user2});
+    await instance.approve(user2, starId1, {from: user1, gasPrice: 0});
+    await instance.approve(user1, starId2, {from: user2, gasPrice: 0});
+    await instance.exchangeStars(starId1, starId2, {from: user1});
+    assert.equal(await instance.ownerOf.call(starId1), user2);
+    assert.equal(await instance.ownerOf.call(starId2), user1);
+})
 
-// it('can exchange two star between two users', async() => {
-//     let instance = await StarNotary.deployed();
-//     let user1 = accounts[1];
-//     let user2 = accounts[2];
-//     let starId1 = 5;
-//     let starId2 = 6;
-//     await instance.createStar('awesome star1', starId1, {from: user1});
-//     await instance.createStar('awesome star2', starId2, {from: user2});
-//     await instance.exchangeStars(starId1, starId2, {from: user1});
-//     assert.equal(instance.ownerOf(starId1), user2);
-//     assert.equal(instance.ownerOf(starId2), user1);
-// })
+it('lets a user transfer a star', async() => {
+    let instance = await StarNotary.deployed();
+    let user1 = accounts[1];
+    let user2 = accounts[2];
+    let starId = 8;
+    await instance.createStar('awesome star', starId, {from: user1});
+    await instance.transferStar(user2, starId, {from: user1});
+    assert.equal(await instance.ownerOf.call(starId), user2)
+});

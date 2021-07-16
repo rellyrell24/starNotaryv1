@@ -9,8 +9,8 @@ contract StarNotary is ERC721 {
         string name;
     }
 
-    // string public starName = "JGTech";
-    // string public starSymbol = "JGT";
+    string public starName = "JGTech";
+    string public starSymbol = "JGT";
 
     mapping(uint256 => Star) public tokenIdToStarInfo;
     mapping(uint256 => uint256) public starsForSale;
@@ -49,20 +49,20 @@ contract StarNotary is ERC721 {
         }
     }
 
-    // function lookUpTokenIdStarInfo(uint256 _tokenId) public view returns (string memory) {
-    //     return tokenIdToStarInfo[_tokenId].name;
-    // }
+    function lookUpTokenIdStarInfo(uint256 _tokenId) public view returns (string memory) {
+        return tokenIdToStarInfo[_tokenId].name;
+    }
 
-    // function exchangeStars(uint256 _tokenId1, uint256 _tokenId2) public {
-    //     address owner1 = ownerOf(_tokenId1);
-    //     address owner2 = ownerOf(_tokenId2);
-    //     require(msg.sender == owner1 || msg.sender == owner2);
-    //     transferFrom(owner1, owner2, _tokenId1);
-    //     transferFrom(owner2, owner1, _tokenId2);
-    // }
+    function exchangeStars(uint256 _tokenId1, uint256 _tokenId2) public {
+        address owner1 = ownerOf(_tokenId1);
+        address owner2 = ownerOf(_tokenId2);
+        require(msg.sender == owner1 || msg.sender == owner2);
+        transferFrom(owner1, owner2, _tokenId1);
+        transferFrom(owner2, owner1, _tokenId2);
+    }
 
-    // function transferStar(address _to1, uint256 _tokenId) public {
-    //     require(msg.sender == ownerOf(_tokenId));
-    //     transferFrom(msg.sender, _to1, _tokenId);
-    // }
+    function transferStar(address _to1, uint256 _tokenId) public {
+        require(msg.sender == ownerOf(_tokenId));
+        transferFrom(msg.sender, _to1, _tokenId);
+    }
 }
