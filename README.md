@@ -2,4 +2,3 @@
 * openzeppelin-solidity@4.2.0
 * ERC-721 Token Name: "JGTech"
 * ERC-721 Token Symbol: "JGT"
-Your “Token Address” on the Rinkeby Network
