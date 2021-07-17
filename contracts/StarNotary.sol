@@ -49,7 +49,7 @@ contract StarNotary is ERC721 {
         }
     }
 
-    function lookUpTokenIdStarInfo(uint256 _tokenId) public view returns (string memory) {
+    function lookUptokenIdToStarInfo(uint256 _tokenId) public view returns (string memory) {
         return tokenIdToStarInfo[_tokenId].name;
     }
 

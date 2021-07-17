@@ -42,9 +42,9 @@ const App = {
   },
 
   lookupStar: async function() {
-    const { lookUpTokenIdStarInfo } = this.meta.methods;
+    const { lookUptokenIdToStarInfo } = this.meta.methods;
     const id = document.getElementById("lookupId").value;
-    const name = await lookUpTokenIdStarInfo(id).call();
+    const name = await lookUptokenIdToStarInfo(id).call();
     App.setStatus("Star Name is " + name + ".");
   }
 };
