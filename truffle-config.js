@@ -54,7 +54,7 @@ module.exports = {
     rinkeby: {
       provider: () => new HDWallet(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
         network_id: 4,
-        gasPrice: 0x01
+        skipDryRun: true
     },
 
     // Another network with more advanced options...
