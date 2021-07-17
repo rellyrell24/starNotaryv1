@@ -39,6 +39,13 @@ const App = {
     const id = document.getElementById("starId").value;
     await createStar(name, id).send({from: this.account});
     App.setStatus("New Star Owner is " + this.account + ".");
+  },
+
+  lookupStar: async function() {
+    const { lookUpTokenIdStarInfo } = this.meta.methods;
+    const id = document.getElementById("lookupId").value;
+    const name = await lookUpTokenIdStarInfo(id).call();
+    App.setStatus("Star Name is " + name + ".");
   }
 };
 
